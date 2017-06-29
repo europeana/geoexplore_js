@@ -144,7 +144,19 @@
 			return '';
 		}
 
-        var renderItem = function(item, jq)
+		var getTypeName = function(type)
+		{
+			switch (type)
+			{
+			    case 'IMAGE': return 'Image';
+			    case 'TEXT' : return 'Text';
+			    case 'VIDEO': return 'Video';
+			    case 'SOUND': return 'Sound';
+			}
+			return '';
+		}
+
+		var renderItem = function(item, jq)
         {
 		    var uri   = item.getURI();
             var title = item.getTitle();
@@ -157,27 +169,27 @@
 
 
             var html  = '\
-        <li>\
+        <a><li>\
             <article class="search-list-item cf " style="">\
               <div class="item-preview">\
                 <div class="item-image">\
                   <div class="inner">\
-                    <a class="link" target="" href="' + uri + '" tabindex="-1">\
+                    <span class="link" tabindex="-1">\
                       <img src="' + thumb + '" alt="' + title + '">\
-                    </a>\
+                    </span>\
                   </div>\
                 </div>\
               </div>\
               <div class="item-info ">\
-                <h2><a href="' + uri + '">' + titleHTML + '\
-                <h5 class=""><a href="' + uri + '">' + agent + '</a></h5>\
+                <h2><span>' + titleHTML + '</span></h2>\
+                <h5 class=""><span>' + agent + '</span></h5>\
                 <div class="item-concepts">Relationship placeholder</div>\
                 <footer>\
                   <div class="item-metadata">\
                     <span data-href=" " class="item-type">\
                       <span class="svg-icon ' + getTypeImage(type) + '"></span>\
                     </span>\
-                    <span class="highlight-text">' + type + '</span>\
+                    <span class="highlight-text">' + getTypeName(type) + '</span>\
                   </div>\
                 </footer>\
               </div>\
@@ -185,7 +197,7 @@
                 <div class="item-agent">' + uri + '</div>\
               </div>\
             </article>\
-          </li>';
+          </li></a>';
 		  jq.append(html);
         };
 

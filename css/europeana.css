@@ -5,8 +5,13 @@
   padding-top: 4.8rem;
 }
 
+#settings-menu .link-text{
+  font-weight: 700;
+}
+
 .cbp-spmenu .results-header {
   padding: 0 0 .65rem;
+  margin-bottom: 0.8rem;
 }
 .cbp-spmenu .result-info {
   font-size: 12px;
@@ -18,8 +23,19 @@
   margin-left: 0;
 }
 
+.cbp-spmenu .search-list-item .item-info h2 a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.4rem;     /* fallback */
+  max-height: 2.8rem;     /* fallback */
+ -webkit-line-clamp: 2;   /* number of lines to show */
+ -webkit-box-orient: vertical;
+}
+
 .cbp-spmenu .search-list-item h2 {
   margin-bottom: 0;
+  font-size: 1em;
 }
 
 .cbp-spmenu .search-list-item h2 a:hover {
@@ -30,6 +46,12 @@
   padding-bottom: 0.25em;
 }
 
+.cbp-spmenu .search-list-item h2 h5 {
+  margin-bottom: 0;
+  font-size: 12px !important;
+}
+
+
 .cbp-spmenu .search-list-item .item-preview {
   width: 27%;
   min-height: 8em;
@@ -38,6 +60,7 @@
 .cbp-spmenu .search-list-item .item-concepts {
   font-size: 12px;
   font-style: italic;
+  margin-bottom: 0;
 }
 
 .cbp-spmenu .search-list-item footer {
@@ -46,8 +69,9 @@
 }
 
 .cbp-spmenu span.highlight-text {
+  font-family: "Open Sans";
   font-size: 12px;
-  top: -4px;
+  top: -2px;
 }
 
 

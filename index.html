@@ -16,6 +16,11 @@
 
     <!-- JAVASCRIPT -->
     <script type='text/javascript' src="js/jquery-3.2.1.min.js"></script>
+    <script type='text/javascript' src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+   crossorigin=""></script>
+    <script type='text/javascript' src="js/leaflet.markercluster.js"></script>
+	<script type='text/javascript' src="js/leaflet-arc.min.js"></script>
     <script type='text/javascript' src="js/classie.js"></script>
     <script type="text/javascript" src="js/places.js"></script>
     <script type="text/javascript" src="js/facets_item.js"></script>
@@ -37,10 +42,6 @@
    integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
    crossorigin=""/>
 
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
-   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
-   crossorigin=""></script>
-    <script src="js/leaflet.markercluster.js"></script>
   </head>
 
   <!-- <body class="animsition"> -->
@@ -138,7 +139,7 @@
 			    case 'IMAGE': return 'svg-icon-image';
 			    case 'TEXT' : return 'svg-icon-openbook';
 			    case 'VIDEO': return 'svg-icon-tv';
-			    case 'AUDIO': return 'svg-icon-music';
+			    case 'SOUND': return 'svg-icon-music';
 			}
 			return '';
 		}
@@ -154,7 +155,6 @@
 
 			var titleHTML = title + (date === undefined ? '' : ' <span class="date">(' + date + ')</span>');
 
-			
 
             var html  = '\
         <li>\
@@ -207,13 +207,15 @@
         var map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
 
         var markers = L.markerClusterGroup({
-            polygonOptions: { weight: 1.5, color: '#D1D1D1', opacity: 0.5 },
+            polygonOptions: { weight: 1.5, color: '#85837B', opacity: 0.5 },
             iconCreateFunction: function(cluster) {
                 // iterate all markers and count
                 var markers = cluster.getAllChildMarkers();
                 var weight = 0;
-                for (var i = 0; i < markers.length; i++) {
-                    if(markers[i].options.hasOwnProperty('density')){
+                for (var i = 0; i < markers.length; i++)
+				{
+                    if(markers[i].options.hasOwnProperty('density'))
+					{
                         weight += markers[i].options.density;
                     }
                 }
@@ -226,7 +228,6 @@
                 });
             }
         });
-
 
         for (var uri in places)
         {
@@ -245,15 +246,15 @@
 
             marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
 
-			marker.on('click', function(e) { 
+            marker.on('click', function(e) {
+                map.panTo(e.target.getLatLng());
 
-          var menuRight = document.getElementById( 'lateral-menu' ),
-            showRight = document.getElementById( 'showRight' ),
-            overlay = document.getElementById( 'overlay' ),
-            clickedMarker = e.target._icon;
-
-            var widthWindow = window.innerWidth,
-              heightWindow = window.innerHeight;
+            var menuRight = document.getElementById( 'lateral-menu' ),
+                showRight = document.getElementById( 'showRight' ),
+                overlay = document.getElementById( 'overlay' ),
+                clickedMarker = e.target._icon,
+                widthWindow = window.innerWidth,
+                heightWindow = window.innerHeight;
 
                 classie.toggle( clickedMarker, 'zIndex' );
                 classie.toggle( overlay, 'opak' );
@@ -261,9 +262,10 @@
                                     "height": heightWindow });
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
                 api.searchItems(e.target.options.uri, 1, renderResultSet);
-	        });
+                var coord = e.latlng;
 
-            marker.bindPopup("<div><p>" + uri + "</p><p>" + density + " Records/Entities</p></div>");
+				  });
+
             markers.addLayer(marker);
         }
 

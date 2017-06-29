@@ -19,10 +19,21 @@
   padding-left: 0;
 }
 
+.cbp-spmenu .search-list-item {
+  margin-bottom: 0.8rem;
+}
 .cbp-spmenu .search-list-item .item-info {
   margin-left: 0;
 }
 
+.cbp-spmenu .search-list-item .item-info:active,
+.cbp-spmenu .search-list-item .item-info:hover {
+  border-left: 5px solid #1676aa;
+  margin-left: -9px;
+  padding-left: 8px;
+}
+
+.disableTitle,
 .cbp-spmenu .search-list-item .item-info h2 a {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,10 +45,10 @@
 }
 
 .cbp-spmenu .search-list-item h2 {
-  margin-bottom: 0;
+  margin-bottom: 0.45em;
   font-size: 1em;
 }
-
+.disableCreator:hover,
 .cbp-spmenu .search-list-item h2 a:hover {
   border-bottom: 0px;
 }
@@ -46,15 +57,16 @@
   padding-bottom: 0.25em;
 }
 
-.cbp-spmenu .search-list-item h2 h5 {
-  margin-bottom: 0;
+.disableCreator,
+.cbp-spmenu .search-list-item h5 {
+  margin-bottom: .45rem;
   font-size: 12px !important;
 }
 
 
 .cbp-spmenu .search-list-item .item-preview {
   width: 27%;
-  min-height: 8em;
+  min-height: 8.5em;
 }
 
 .cbp-spmenu .search-list-item .item-concepts {

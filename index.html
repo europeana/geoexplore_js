@@ -181,8 +181,8 @@
                 </div>\
               </div>\
               <div class="item-info ">\
-                <h2><span>' + titleHTML + '</span></h2>\
-                <h5 class=""><span>' + agent + '</span></h5>\
+                <h2><span class="disableTitle">' + titleHTML + '</span></h2>\
+                <h5><span class="disableCreator">' + agent + '</span></h5>\
                 <div class="item-concepts">Relationship placeholder</div>\
                 <footer>\
                   <div class="item-metadata">\
@@ -283,7 +283,7 @@
 
         map.addLayer(markers);
         var markerLayer = $( ".leaflet-marker-pane" );
-        
+
         $( markerLayer ).append( "<div id='overlay'></div>" );
 
 

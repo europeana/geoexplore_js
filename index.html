@@ -153,7 +153,6 @@
 
 			var titleHTML = title + (date === undefined ? '' : ' <span class="date">(' + date + ')</span>');
 
-			
 
             var html  = '\
         <li>\
@@ -206,7 +205,7 @@
         var map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
 
         var markers = L.markerClusterGroup({
-            polygonOptions: { weight: 1.5, color: '#D1D1D1', opacity: 0.5 },
+            polygonOptions: { weight: 1.5, color: '#85837B', opacity: 0.5 },
             iconCreateFunction: function(cluster) {
                 // iterate all markers and count
                 var markers = cluster.getAllChildMarkers();
@@ -243,7 +242,7 @@
             });
 
             marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
-			marker.on('click', function(e) { 
+			marker.on('click', function(e) {
 			    var menuRight = document.getElementById( 'lateral-menu' );
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
                 api.searchItems(e.target.options.uri, 1, renderResultSet);

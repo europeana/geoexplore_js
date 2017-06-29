@@ -189,6 +189,7 @@
         var map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
 
         var markers = L.markerClusterGroup({
+            polygonOptions: { weight: 1.5, color: '#D1D1D1', opacity: 0.5 },
             iconCreateFunction: function(cluster) {
                 // iterate all markers and count
                 var markers = cluster.getAllChildMarkers();
@@ -235,9 +236,6 @@
         }
 
         map.addLayer(markers);
-
-
-
     </script>
     <!-- /.JS -->
 </body>

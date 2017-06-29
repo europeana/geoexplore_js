@@ -128,7 +128,19 @@
 
 	<script type="text/javascript">
 
-        var api = new API();	
+        var api = new API();
+
+		var getTypeImage = function(type)
+		{
+			switch (type)
+			{
+			    case 'IMAGE': return 'svg-icon-image';
+			    case 'TEXT' : return 'svg-icon-openbook';
+			    case 'VIDEO': return 'svg-icon-tv';
+			    case 'AUDIO': return 'svg-icon-music';
+			}
+			return '';
+		}
 
         var renderItem = function(item, jq)
         {
@@ -138,6 +150,11 @@
             var agent = item.getAgent();
 			var thumb = item.getThumbnail();
             var type  = item.getType();
+
+			var titleHTML = title + (date === undefined ? '' : ' <span class="date">(' + date + ')</span>');
+
+			
+
             var html  = '\
         <li>\
             <article class="search-list-item cf " style="">\
@@ -151,15 +168,15 @@
                 </div>\
               </div>\
               <div class="item-info ">\
-                <h2><a href="' + uri + '">' + title + ' <span class="date">(' + date + ')</span>\
+                <h2><a href="' + uri + '">' + titleHTML + '\
                 <h5 class=""><a href="' + uri + '">' + agent + '</a></h5>\
                 <div class="item-concepts">Relationship placeholder</div>\
                 <footer>\
                   <div class="item-metadata">\
                     <span data-href=" " class="item-type">\
-                      <span class="svg-icon svg-icon-' + type.toLowerCase() + '"></span>\
+                      <span class="svg-icon ' + getTypeImage(type) + '"></span>\
                     </span>\
-                    <span class="highlight-text"> Image </span>\
+                    <span class="highlight-text">' + type + '</span>\
                   </div>\
                 </footer>\
               </div>\

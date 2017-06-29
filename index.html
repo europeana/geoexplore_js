@@ -225,7 +225,6 @@
             }
         });
 
-
         for (var uri in places)
         {
             var geo = places[uri];
@@ -242,8 +241,10 @@
             });
 
             marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
-			marker.on('click', function(e) {
-			    var menuRight = document.getElementById( 'lateral-menu' );
+            marker.on('click', function(e) {
+                map.panTo(e.target.getLatLng());
+
+                var menuRight = document.getElementById( 'lateral-menu' );
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
                 api.searchItems(e.target.options.uri, 1, renderResultSet);
 	        });

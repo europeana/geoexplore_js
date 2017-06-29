@@ -202,7 +202,7 @@
                 var ms = getRadius(weight);
                 // create the icon with the "weight" count, instead of marker count
                 return L.divIcon({
-                    html: '<div><span>' + weight + '</span></div>',
+                    html: '<div><span>' + weight.toLocaleString('en-US', { minimumFractionDigits: 0 }) + '</span></div>',
                     className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
                 });
             }
@@ -220,7 +220,7 @@
             var ms = getRadius(density);
 
             var scaledIcon = L.divIcon({
-                html: '<div><span>' + density + '</span></div>',
+                html: '<div><span>' + density.toLocaleString('en-US', { minimumFractionDigits: 0 }) + '</span></div>',
                 className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
             });
 

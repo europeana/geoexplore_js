@@ -62,6 +62,7 @@ Item.prototype.getYear = function()
 Item.prototype.getThumbnail = function()
 {
 	var edmPreview = this.data.edmPreview;
+	if (edmPreview === undefined) { return ""; }
 	if (edmPreview.constructor === Array) { return edmPreview[0]; }
 	return edmPreview;
 };

@@ -130,7 +130,7 @@
 
         var api = new API();	
 
-        var renderItem = function(item)
+        var renderItem = function(item, jq)
         {
 		    var uri   = item.getURI();
             var title = item.getTitle();
@@ -168,14 +168,16 @@
               </div>\
             </article>\
           </li>';
-		  $("#item-list").append(html);
+		  jq.append(html);
         };
 
 		var renderResultSet = function(rs)
         {
 		    $(".result-info").text(rs.getStart() + " - " + rs.getEnd() + " of " + rs.getTotal() + " results");
+			var jq = $("#item-list");
+			jq.empty();
 			var items = rs.getItems();
-		    for ( var i in items ) { renderItem(items[i]); }
+		    for ( var i in items ) { renderItem(items[i], jq); }
 		};
 
 		var getRadius = function (density) {

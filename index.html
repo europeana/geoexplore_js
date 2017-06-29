@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-skrollr">
+<html lang="en">
 
   <head>
     <!-- Meta -->
@@ -116,6 +116,7 @@
     <!-- </div> -->
   <div class="map-wrapper">
       <div id="map" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag"></div>
+      <!-- <div id="overlay"></div> -->
   </div>
 
     <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right results-list cf" id="lateral-menu"  style="overflow-y: scroll">
@@ -243,16 +244,35 @@
             });
 
             marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
+
 			marker.on('click', function(e) { 
-			    var menuRight = document.getElementById( 'lateral-menu' );
+
+          var menuRight = document.getElementById( 'lateral-menu' ),
+            showRight = document.getElementById( 'showRight' ),
+            overlay = document.getElementById( 'overlay' ),
+            clickedMarker = e.target._icon;
+
+            var widthWindow = window.innerWidth,
+              heightWindow = window.innerHeight;
+
+                classie.toggle( clickedMarker, 'zIndex' );
+                classie.toggle( overlay, 'opak' );
+                $( overlay ).css({  "width": widthWindow,
+                                    "height": heightWindow });
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
                 api.searchItems(e.target.options.uri, 1, renderResultSet);
 	        });
+
             marker.bindPopup("<div><p>" + uri + "</p><p>" + density + " Records/Entities</p></div>");
             markers.addLayer(marker);
         }
 
         map.addLayer(markers);
+        var markerLayer = $( ".leaflet-marker-pane" );
+        
+        $( markerLayer ).append( "<div id='overlay'></div>" );
+
+
     </script>
     <!-- /.JS -->
 </body>

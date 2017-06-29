@@ -261,15 +261,16 @@
             marker.on('click', function(e) {
                 map.panTo(e.target.getLatLng());
 
-            var menuRight = document.getElementById( 'lateral-menu' ),
-                showRight = document.getElementById( 'showRight' ),
-                overlay = document.getElementById( 'overlay' ),
-                clickedMarker = e.target._icon,
-                widthWindow = window.innerWidth,
-                heightWindow = window.innerHeight;
+                var menuRight = document.getElementById( 'lateral-menu' ),
+                  showRight = document.getElementById( 'showRight' ),
+                  overlay = document.getElementById( 'overlay' ),
+                  clickedMarker = e.target._icon,
+                  widthWindow = window.innerWidth,
+                  heightWindow = window.innerHeight;
 
                 classie.toggle( clickedMarker, 'zIndex' );
                 classie.toggle( overlay, 'opak' );
+
                 $( overlay ).css({  "width": widthWindow,
                                     "height": heightWindow });
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
@@ -285,7 +286,11 @@
         var markerLayer = $( ".leaflet-marker-pane" );
 
         $( markerLayer ).append( "<div id='overlay'></div>" );
-
+        $( "#overlay" ).click(function(e){
+          classie.toggle( e.target, 'opak' );
+          var menuRight = document.getElementById( 'lateral-menu' );
+          classie.toggle( menuRight, 'cbp-spmenu-open' );
+        });
 
     </script>
     <!-- /.JS -->

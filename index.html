@@ -16,6 +16,11 @@
 
     <!-- JAVASCRIPT -->
     <script type='text/javascript' src="js/jquery-3.2.1.min.js"></script>
+    <script type='text/javascript' src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+   crossorigin=""></script>
+    <script type='text/javascript' src="js/leaflet.markercluster.js"></script>
+	<script type='text/javascript' src="js/leaflet-arc.min.js"></script>
     <script type='text/javascript' src="js/classie.js"></script>
     <script type="text/javascript" src="js/places.js"></script>
     <script type="text/javascript" src="js/facets_item.js"></script>
@@ -37,10 +42,6 @@
    integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
    crossorigin=""/>
 
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
-   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
-   crossorigin=""></script>
-    <script src="js/leaflet.markercluster.js"></script>
   </head>
 
   <!-- <body class="animsition"> -->
@@ -137,7 +138,7 @@
 			    case 'IMAGE': return 'svg-icon-image';
 			    case 'TEXT' : return 'svg-icon-openbook';
 			    case 'VIDEO': return 'svg-icon-tv';
-			    case 'AUDIO': return 'svg-icon-music';
+			    case 'SOUND': return 'svg-icon-music';
 			}
 			return '';
 		}
@@ -210,8 +211,10 @@
                 // iterate all markers and count
                 var markers = cluster.getAllChildMarkers();
                 var weight = 0;
-                for (var i = 0; i < markers.length; i++) {
-                    if(markers[i].options.hasOwnProperty('density')){
+                for (var i = 0; i < markers.length; i++)
+				{
+                    if(markers[i].options.hasOwnProperty('density'))
+					{
                         weight += markers[i].options.density;
                     }
                 }
@@ -246,14 +249,15 @@
 			    var menuRight = document.getElementById( 'lateral-menu' );
                 classie.toggle( menuRight, 'cbp-spmenu-open' );
                 api.searchItems(e.target.options.uri, 1, renderResultSet);
+                var coord = e.latlng;
+
+				//L.Polyline.Arc([coord.lat, coord.lng], [55.7522200, 37.6155600]).addTo(map);
 	        });
             marker.bindPopup("<div><p>" + uri + "</p><p>" + density + " Records/Entities</p></div>");
             markers.addLayer(marker);
         }
 
         map.addLayer(markers);
-
-
 
     </script>
     <!-- /.JS -->

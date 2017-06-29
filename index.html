@@ -287,9 +287,11 @@
         
         $( markerLayer ).append( "<div id='overlay'></div>" );
         $( "#overlay" ).click(function(e){
-          classie.toggle( e.target, 'opak' );
-          var menuRight = document.getElementById( 'lateral-menu' );
-          classie.toggle( menuRight, 'cbp-spmenu-open' );
+          if ($("#overlay").hasClass( 'opak' )) {
+            classie.toggle(e.target, 'opak');
+            var menuRight = document.getElementById('lateral-menu');
+            classie.toggle(menuRight, 'cbp-spmenu-open');
+          }
         });
 
     </script>

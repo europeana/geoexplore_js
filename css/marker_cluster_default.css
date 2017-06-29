@@ -14,6 +14,7 @@
 	text-align: center;
 	border-radius: 50%;
 	font: 12px "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 600;
 	}
 .marker-cluster span {
 	color: white;

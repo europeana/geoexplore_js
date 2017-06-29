@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="no-skrollr">
+
+  <head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/geoexplore.css">
+    <link rel="stylesheet" type="text/css" href="css/europeana.css">
+    <link rel="stylesheet" type="text/css" href="css/marker_cluster.css">
+    <link rel="stylesheet" type="text/css" href="css/marker_cluster_default.css">
+    <link rel="stylesheet" type="text/css" href="css/lateral-menu.css" />
+
+    <!-- JAVASCRIPT -->
+    <script type='text/javascript' src="js/jquery-3.2.1.min.js"></script>
+    <script type='text/javascript' src="js/classie.js"></script>
+    <script type="text/javascript" src="js/places.js"></script>
+    <script type="text/javascript" src="js/facets_item.js"></script>
+    <script type="text/javascript" src="js/secret.js"></script>
+    <script type='text/javascript' src="js/api.js"></script>
+
+    <script type="text/javascript">
+
+      var headLinks = [{
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css?family=Ubuntu:300,400,700%7COpen+Sans:400italic,700italic,400,700&amp;subset=latin,greek,cyrillic',
+          media: 'all',
+          css: 'true'
+        }];
+
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+   crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+   crossorigin=""></script>
+    <script src="js/leaflet.markercluster.js"></script>
+  </head>
+
+  <!-- <body class="animsition"> -->
+  <body>
+    <!-- <div class="map-heading header-wrapper"> -->
+      <header class="header">
+        <div class="cf">
+          <a href="/portal/en" class="logo ir">
+            <h1>Europeana Collections</h1></a>
+          <nav role="navigation" class="nav_primary">
+            <ul id="main-menu" class="sm cf nav-access " data-smartmenus-id="1498643492932727">
+              <li> <a class="has-submenu"><span class="sub-arrow" aria-hidden="true">+</span> <span class="link-text">Collections</span> </a>
+                <ul class="menu-sublevel caret ">
+                  <li>
+                    <a href="/portal/en/collections/world-war-I" class=""> <span class="link-text">1914-1918</span> </a>
+                  </li>
+                  <li>
+                    <a href="/portal/en/collections/art" class=""> <span class="link-text">Art</span> </a>
+                  </li>
+                  <li>
+                    <a href="/portal/en/collections/fashion" class=""> <span class="link-text">Fashion</span> </a>
+                  </li>
+                  <li>
+                    <a href="/portal/en/collections/music" class=""> <span class="link-text">Music</span> </a>
+                  </li>
+                  <li>
+                    <a href="/portal/en/collections/photography" class=""> <span class="link-text">Photography</span> </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="is-current has-submenu"><span class="sub-arrow" aria-hidden="true">+</span> <span class="link-text">Explore</span> </a>
+                <ul class="menu-sublevel caret ">
+                  <li> <a href="/portal/en/explore/newcontent.html" class=""> <span class="link-text">What's new?</span> </a> </li>
+                  <li> <a href="/portal/en/explore/colours.html" class=""> <span class="link-text">Colours</span> </a> </li>
+                  <li> <a href="/portal/en/explore/sources.html" class=""> <span class="link-text">Sources</span> </a> </li>
+                  <li> <a href="/portal/en/explore/topics.html" class=""> <span class="link-text">Topics</span> </a> </li>
+                  <li> <a href="/portal/en/explore/people.html" class=""> <span class="link-text">People</span> </a> </li>
+                  <li> <a href="/portal/en/explore/periods.html" class=""> <span class="link-text">Time periods</span> </a> </li>
+                  <li> <a class="has-submenu"><span class="sub-arrow" aria-hidden="true">+</span> <span class="link-text">Galleries</span> </a>
+                    <ul class="menu-sublevel caret ">
+                      <li> <a href="/portal/en/explore/galleries/heinrich-hamann" class=""> <span class="link-text">Sports photography by Heinrich Hamann</span> </a> </li>
+                      <li> <a href="/portal/en/explore/galleries/the-dachshund-mascot-of-the-german-soldier" class=""> <span class="link-text">The dachshund, mascot of the German soldier</span> </a> </li>
+                      <li> <a href="/portal/en/explore/galleries/portraits-of-german-army-officers-by-johann-valett" class=""> <span class="link-text">Portraits of German army officers by Johann Valett</span> </a> </li>
+                      <li> <a href="/portal/en/explore/galleries/toys-and-games-from-world-war-i" class=""> <span class="link-text">Toys and Games from World War I</span> </a> </li> <li> <a href="/portal/en/explore/galleries/ww1-animals-number-1-dogs" class=""> <span class="link-text">Dogs in World War I</span> </a> </li>
+                      <li> <a href="/portal/en/explore/galleries/the-music-of-machines" class=""> <span class="link-text">The Music of Machines</span> </a> </li>
+                      <li> <a href="/portal/en/explore/galleries" class=""> <span class="link-text">All Galleries...</span> </a> </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li> <a href="/portal/en/exhibitions/foyer" class="has-submenu"><span class="sub-arrow" aria-hidden="true">+</span> <span class="link-text">Exhibitions</span> </a>
+                <ul class="menu-sublevel caret " style="display: none; top: auto; left: 0px; margin-left: -1px; margin-top: 4px;">
+                  <li> <a href="http://www.europeana.eu/portal/en/exhibitions/industrial-photography-in-the-machine-age" class=""> <span class="link-text">Industrial Photography in the Machine Age</span> </a> </li>
+                  <li> <a href="http://www.europeana.eu/portal/en/exhibitions/seven-men-one-leg" class=""> <span class="link-text">Seven men, one leg</span> </a> </li> <li> <a href="http://www.europeana.eu/portal/en/exhibitions/past-to-present" class=""> <span class="link-text">Past to Present - Fashion Reinterpretations</span> </a> </li> <li> <a href="http://www.europeana.eu/portal/en/exhibitions/picture-this-vintage-postcards-of-southeastern-europe" class=""> <span class="link-text">Picture this! Vintage postcards of Southeastern Europe</span> </a> </li> <li> <a href="http://www.europeana.eu/portal/en/exhibitions/art-nouveau-a-universal-style" class=""> <span class="link-text">Art Nouveau - A Universal Style</span> </a> </li> <li> <a href="http://www.europeana.eu/portal/en/exhibitions/1946-ogooue-congo-mission" class=""> <span class="link-text">1946 Ogooué-Congo Mission</span> </a> </li> <li> <a href="/portal/en/exhibitions/foyer" class=""> <span class="link-text">All exhibitions…</span> </a> </li>
+                </ul>
+              </li>
+              <li> <a href="http://blog.europeana.eu/" class="has-submenu"><span class="sub-arrow" aria-hidden="true">+</span> <span class="link-text">Blog</span> </a>
+              <ul class="menu-sublevel caret ">
+                <li> <a href="http://blog.europeana.eu/2017/06/europeana-1914-1918-thematic-collection-launches/" class=""> <span class="link-text">Europeana 1914-1918 thematic collection launches</span> </a> </li>
+
+              <li> <a href="http://blog.europeana.eu/2017/06/reflections-on-europeana-photography/" class=""> <span class="link-text">Reflections on Europeana Photography</span> </a> </li> <li> <a href="http://blog.europeana.eu/2017/06/scandal-in-warsaw-podkowinskis-frenzy-and-the-birth-of-young-poland/" class=""> <span class="link-text">Scandal in Warsaw: Podkowiński’s Frenzy and the birth of Young Poland</span> </a> </li> <li> <a href="http://blog.europeana.eu/2017/06/lest-we-forget-oxford-university-needs-you-to-spread-the-word/" class=""> <span class="link-text">‘Lest We Forget’: Oxford University needs you to spread the word!</span> </a> </li> <li> <a href="http://blog.europeana.eu/" class=""> <span class="link-text">All blog posts…</span> </a>
+                </li>
+              </ul>
+              </li>
+            </ul>
+          </nav>
+          <div class="nav-global"> <a href="#" id="oursites_button" class="nav-toggle nav-toggle-sites" aria-controls="oursites" aria-expanded="false">
+            <span class="link-text">our sites</span><span class="js-panelstate is-vishidden">(open panel)</span> </a> <div class="nav-toggle nav-toggle-settings nav-utility"> <ul id="settings-menu" class="sm cf nav-access caret-right" data-smartmenus-id="1498643492945887"> <li> <a href="#" class="has-submenu"><span class="sub-arrow" aria-hidden="true">+</span><span class="svg-icon-language"></span><span class="link-text">Language</span></a> <ul class="menu-sublevel caret"> <li><a  </ul> </li> </ul> </div> <a href="#" class="nav-toggle nav-toggle-menu"> <svg class="icon icon-menu"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-menu"></use> </svg> <span>Menu</span> </a>
+          </div>
+        </div>
+      </header>
+    <!-- </div> -->
+  <div class="map-wrapper">
+      <div id="map" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag"></div>
+  </div>
+
+    <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right results-list cf" id="lateral-menu"  style="overflow-y: scroll">
+      <div class="results-header">
+          <div class="result-info"></div>
+      </div>
+      <ol id="item-list">
+      </ol>
+    </div>
+
+	<script type="text/javascript">
+
+        var api = new API();	
+
+        var renderItem = function(item)
+        {
+		    var uri   = item.getURI();
+            var title = item.getTitle();
+			var date  = item.getYear();
+            var agent = item.getAgent();
+			var thumb = item.getThumbnail();
+            var type  = item.getType();
+            var html  = '\
+        <li>\
+            <article class="search-list-item cf " style="">\
+              <div class="item-preview">\
+                <div class="item-image">\
+                  <div class="inner">\
+                    <a class="link" target="" href="' + uri + '" tabindex="-1">\
+                      <img src="' + thumb + '" alt="' + title + '">\
+                    </a>\
+                  </div>\
+                </div>\
+              </div>\
+              <div class="item-info ">\
+                <h2><a href="' + uri + '">' + title + ' <span class="date">(' + date + ')</span>\
+                <h5 class=""><a href="' + uri + '">' + agent + '</a></h5>\
+                <div class="item-concepts">Relationship placeholder</div>\
+                <footer>\
+                  <div class="item-metadata">\
+                    <span data-href=" " class="item-type">\
+                      <span class="svg-icon svg-icon-' + type.toLowerCase() + '"></span>\
+                    </span>\
+                    <span class="highlight-text"> Image </span>\
+                  </div>\
+                </footer>\
+              </div>\
+              <div class="item-agent-data show-with-grid">\
+                <div class="item-agent">' + uri + '</div>\
+              </div>\
+            </article>\
+          </li>';
+		  $("#item-list").append(html);
+        };
+
+		var renderResultSet = function(rs)
+        {
+		    $(".result-info").text(rs.getStart() + " - " + rs.getEnd() + " of " + rs.getTotal() + " results");
+			var items = rs.getItems();
+		    for ( var i in items ) { renderItem(items[i]); }
+		};
+
+		var getRadius = function (density) {
+            return 20 + Math.trunc(Math.log10(density) * 10);
+        }
+        var tile_url = 'https://api.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=' + token;
+        var tiles = L.tileLayer(tile_url, { attribution: 'Europeana Geoexplore', maxZoom: 18 });
+
+        var map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
+
+        var markers = L.markerClusterGroup({
+            iconCreateFunction: function(cluster) {
+                // iterate all markers and count
+                var markers = cluster.getAllChildMarkers();
+                var weight = 0;
+                for (var i = 0; i < markers.length; i++) {
+                    if(markers[i].options.hasOwnProperty('density')){
+                        weight += markers[i].options.density;
+                    }
+                }
+
+                var ms = getRadius(weight);
+                // create the icon with the "weight" count, instead of marker count
+                return L.divIcon({
+                    html: '<div><span>' + weight + '</span></div>',
+                    className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
+                });
+            }
+        });
+
+
+        for (var uri in places)
+        {
+            var geo = places[uri];
+            var longitude = parseFloat(geo[0]);
+            var latitude  = parseFloat(geo[1]);
+            if (isNaN(longitude) || isNaN(latitude)) { continue; }
+
+            var density = facets_item[uri];
+            var ms = getRadius(density);
+
+            var scaledIcon = L.divIcon({
+                html: '<div><span>' + density + '</span></div>',
+                className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
+            });
+
+            marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
+			marker.on('click', function(e) { 
+			    var menuRight = document.getElementById( 'lateral-menu' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                api.searchItems(e.target.options.uri, 1, renderResultSet);
+	        });
+            marker.bindPopup("<div><p>" + uri + "</p><p>" + density + " Records/Entities</p></div>");
+            markers.addLayer(marker);
+        }
+
+        map.addLayer(markers);
+
+
+
+    </script>
+    <!-- /.JS -->
+</body>
+</html>

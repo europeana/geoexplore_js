@@ -1,7 +1,7 @@
 .marker-cluster {
 	background-clip: padding-box;
 	border-radius: 50%;
-	background-color: rgb(26, 138, 199, 0.8);
+	background-color: rgba(26, 138, 199, 0.8);
 	}
 .marker-cluster div {
 	width: 100%;

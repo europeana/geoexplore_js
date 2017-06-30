@@ -69,6 +69,7 @@
   min-height: 8.5em;
 }
 
+.leaflet-popup-content .search-list-item.cf .item-info .item-concepts,
 .cbp-spmenu .search-list-item .item-concepts {
   font-size: 12px;
   font-style: italic;
@@ -86,7 +87,13 @@
   top: -2px;
 }
 
+.leaflet-popup-content .search-list-item.cf .item-info {
+  margin-left: 0;
+}
 
+.leaflet-popup-content .search-list-item.cf .item-info h5 {
+  font-family: "Open Sans";
+}
 
 /* all the css from europeana */
 * {

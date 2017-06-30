@@ -76,15 +76,13 @@ EuropeanaMap.prototype.addMarker = function(coord, uri, density)
 
 		var showRight = document.getElementById( 'showRight' ),
             overlay = document.getElementById( 'overlay' ),
-            clickedMarker = e.target._icon,
-            widthWindow = window.innerWidth,
-            heightWindow = window.innerHeight;
+            clickedMarker = e.target._icon;
 
 		classie.toggle( clickedMarker, 'zIndex' );
         classie.toggle( overlay, 'opak' );
 		$("#overlay").show();
  
-        $( overlay ).css({  "width": widthWindow, "height": heightWindow });
+        $( overlay ).css({  "width": window.innerWidth, "height": window.innerHeight });
 
 		api.searchItems(e.target.options.uri, 1, function(rs) { listResults.renderResultSet(rs); } );
 	});

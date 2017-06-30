@@ -81,9 +81,10 @@ ItemSpider.prototype.renderAgent = function(agent)
 	var coords = agent.getDeathCoord();
 	for (var i in coords)
 	{
-		this.renderMarker(agent, coords[i]);
+		var marker = this.renderMarker(agent, coords[i]);
 		this.renderAgentPopup(agent, 'Death Place', marker)
 	}
+	this.map.fitBounds(this.group.getBounds());
 }
 
 ItemSpider.prototype.renderItemPopup = function(marker)

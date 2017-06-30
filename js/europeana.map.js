@@ -7,7 +7,12 @@ function EuropeanaMap()
 EuropeanaMap.prototype.install = function()
 {
 	var tile_url = 'https://api.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=' + token;
-	var tiles = L.tileLayer(tile_url, { attribution: 'Europeana Geoexplore', maxZoom: 18, minZoom: 2 });
+
+	var opts  = { 
+		'attribution': 'Europeana Geoexplore'
+	  , 'maxZoom': 18, 'minZoom': 2
+	};
+	var tiles = L.tileLayer(tile_url, opts);
     this.map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
 
 	var bounds = L.latLngBounds(L.latLng(-95, -180), L.latLng(95, 180));

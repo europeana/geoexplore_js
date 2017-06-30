@@ -21,6 +21,7 @@ ItemSpider.prototype.render = function()
 	var _this = this;
 
 	this.master = null;
+	$('.leaflet-zoom-animated').parent().css('z-index', 1011);
 
 	var itemPlaces = this.item.getPlaces();
 	for (var e in itemPlaces)

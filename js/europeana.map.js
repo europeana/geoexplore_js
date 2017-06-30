@@ -37,9 +37,9 @@ EuropeanaMap.prototype.install = function()
 
 	this.map.on("moveend", function () {
 		var transform_matrix = $(".leaflet-map-pane").css('transform');
-		var x = parseInt(transform_matrix.split(',')[4])
-		var y = parseInt(transform_matrix.split(',')[5])
-		$("#overlay").css('transform', 'translate3d(-' + x + 'px, -' + y + 'px, 0px)');
+		var x = parseInt(transform_matrix.split(',')[4]) * -1;
+		var y = parseInt(transform_matrix.split(',')[5]) * -1;
+		$("#overlay").css('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0px)');
 	});
 }
 

@@ -20,6 +20,7 @@ ItemSpider.prototype.render = function()
 {
 	var _this = this;
 
+	this.group.clearLayers();
 	this.master = null;
 	$('.leaflet-zoom-animated').parent().css('z-index', 1011);
 

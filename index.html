@@ -145,6 +145,7 @@
         $( "#overlay" ).click(function(e) {
           if ($("#overlay").hasClass( 'opak' )) {
             classie.toggle(e.target, 'opak');
+            $("#overlay").hide();
             var menuRight = document.getElementById('lateral-menu');
             classie.toggle(menuRight, 'cbp-spmenu-open');
             $(".zIndex").removeClass("zIndex");

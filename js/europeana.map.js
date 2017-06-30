@@ -82,6 +82,7 @@ EuropeanaMap.prototype.addMarker = function(coord, uri, density)
 
 		classie.toggle( clickedMarker, 'zIndex' );
         classie.toggle( overlay, 'opak' );
+		$("#overlay").show();
  
         $( overlay ).css({  "width": widthWindow, "height": heightWindow });
 

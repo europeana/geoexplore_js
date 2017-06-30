@@ -22,12 +22,18 @@
     <script type='text/javascript' src="js/leaflet.markercluster.js"></script>
 	<script type='text/javascript' src="js/leaflet-arc.min.js"></script>
     <script type='text/javascript' src="js/classie.js"></script>
-    <script type="text/javascript" src="js/places.js"></script>
-    <script type="text/javascript" src="js/facets_item.js"></script>
     <script type="text/javascript" src="js/secret.js"></script>
     <script type='text/javascript' src="js/api.js"></script>
+    <script type='text/javascript' src="js/item-spider.js"></script>
+    <script type='text/javascript' src="js/list-results.js"></script>
+    <script type='text/javascript' src="js/europeana.map.js"></script>
 
-    <script type="text/javascript">
+    <!-- DATA -->
+    <script type="text/javascript" src="js/places.js"></script>
+    <script type="text/javascript" src="js/places_agents.js"></script>
+    <script type="text/javascript" src="js/facets_item.js"></script>
+
+	<script type="text/javascript">
 
       var headLinks = [{
           rel: 'stylesheet',
@@ -131,167 +137,33 @@
 	<script type="text/javascript">
 
         var api = new API();
+		var map = new EuropeanaMap();
 
-		var getTypeImage = function(type)
-		{
-			switch (type)
-			{
-			    case 'IMAGE': return 'svg-icon-image';
-			    case 'TEXT' : return 'svg-icon-openbook';
-			    case 'VIDEO': return 'svg-icon-tv';
-			    case 'SOUND': return 'svg-icon-music';
-			}
-			return '';
-		}
-
-		var getTypeName = function(type)
-		{
-			switch (type)
-			{
-			    case 'IMAGE': return 'Image';
-			    case 'TEXT' : return 'Text';
-			    case 'VIDEO': return 'Video';
-			    case 'SOUND': return 'Sound';
-			}
-			return '';
-		}
-
-		var renderItem = function(item, jq)
-        {
-		    var uri   = item.getURI();
-            var title = item.getTitle();
-			var date  = item.getYear();
-            var agent = item.getAgent();
-			var thumb = item.getThumbnail();
-            var type  = item.getType();
-
-			var titleHTML = title + (date === undefined ? '' : ' <span class="date">(' + date + ')</span>');
-
-
-            var html  = '\
-        <a><li>\
-            <article class="search-list-item cf " style="">\
-              <div class="item-preview">\
-                <div class="item-image">\
-                  <div class="inner">\
-                    <span class="link" tabindex="-1">\
-                      <img src="' + thumb + '" alt="' + title + '">\
-                    </span>\
-                  </div>\
-                </div>\
-              </div>\
-              <div class="item-info ">\
-                <h2><span>' + titleHTML + '</span></h2>\
-                <h5 class=""><span>' + agent + '</span></h5>\
-                <div class="item-concepts">Relationship placeholder</div>\
-                <footer>\
-                  <div class="item-metadata">\
-                    <span data-href=" " class="item-type">\
-                      <span class="svg-icon ' + getTypeImage(type) + '"></span>\
-                    </span>\
-                    <span class="highlight-text">' + getTypeName(type) + '</span>\
-                  </div>\
-                </footer>\
-              </div>\
-              <div class="item-agent-data show-with-grid">\
-                <div class="item-agent">' + uri + '</div>\
-              </div>\
-            </article>\
-          </li></a>';
-		  jq.append(html);
-        };
-
-		var renderResultSet = function(rs)
-        {
-		    $(".result-info").text(rs.getStart() + " - " + rs.getEnd() + " of " + rs.getTotal() + " results");
-			var jq = $("#item-list");
-			jq.empty();
-			var items = rs.getItems();
-		    for ( var i in items ) { renderItem(items[i], jq); }
-		};
-
-		var getRadius = function (density) {
-            return 20 + Math.trunc(Math.log10(density) * 10);
-        }
-        var tile_url = 'https://api.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=' + token;
-        var tiles = L.tileLayer(tile_url, { attribution: 'Europeana Geoexplore', maxZoom: 18 });
-
-        var map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
-
-        var markers = L.markerClusterGroup({
-            polygonOptions: { weight: 1.5, color: '#85837B', opacity: 0.5 },
-            iconCreateFunction: function(cluster) {
-                // iterate all markers and count
-                var markers = cluster.getAllChildMarkers();
-                var weight = 0;
-                for (var i = 0; i < markers.length; i++)
-				{
-                    if(markers[i].options.hasOwnProperty('density'))
-					{
-                        weight += markers[i].options.density;
-                    }
-                }
-
-                var ms = getRadius(weight);
-                // create the icon with the "weight" count, instead of marker count
-                return L.divIcon({
-                    html: '<div><span>' + weight.toLocaleString('en-US', { minimumFractionDigits: 0 }) + '</span></div>',
-                    className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
-                });
-            }
-        });
+		map.install();
 
         for (var uri in places)
         {
             var geo = places[uri];
-            var longitude = parseFloat(geo[0]);
-            var latitude  = parseFloat(geo[1]);
+            var longitude = geo[0];
+            var latitude  = geo[1];
             if (isNaN(longitude) || isNaN(latitude)) { continue; }
 
             var density = facets_item[uri];
-            var ms = getRadius(density);
-
-            var scaledIcon = L.divIcon({
-                html: '<div><span>' + density.toLocaleString('en-US', { minimumFractionDigits: 0 }) + '</span></div>',
-                className: 'marker-cluster marker-cluster-small', iconSize: new L.Point(ms, ms)
-            });
-
-            marker = L.marker([latitude, longitude], { title: uri, density: density, uri: uri, icon: scaledIcon });
-
-            marker.on('click', function(e) {
-                map.panTo(e.target.getLatLng());
-
-                var menuRight = document.getElementById( 'lateral-menu' ),
-                  showRight = document.getElementById( 'showRight' ),
-                  overlay = document.getElementById( 'overlay' ),
-                  clickedMarker = e.target._icon,
-                  widthWindow = window.innerWidth,
-                  heightWindow = window.innerHeight;
-
-                classie.toggle( clickedMarker, 'zIndex' );
-                classie.toggle( overlay, 'opak' );
-
-                $( overlay ).css({  "width": widthWindow,
-                                    "height": heightWindow });
-                classie.toggle( menuRight, 'cbp-spmenu-open' );
-                api.searchItems(e.target.options.uri, 1, renderResultSet);
-                var coord = e.latlng;
-
-				  });
-
-            markers.addLayer(marker);
+			map.addMarker([latitude, longitude], uri, density);
         }
 
-        map.addLayer(markers);
+        map.getMap().addLayer(map.markers);
+
+		var spider      = new ItemSpider(map.getMap());
+		var listResults = new ListResults();
+
         var markerLayer = $( ".leaflet-marker-pane" );
-        
+
         $( markerLayer ).append( "<div id='overlay'></div>" );
-        $( "#overlay" ).click(function(e){
-          if ($("#overlay").hasClass( 'opak' )) {
-            classie.toggle(e.target, 'opak');
-            var menuRight = document.getElementById('lateral-menu');
-            classie.toggle(menuRight, 'cbp-spmenu-open');
-          }
+        $( "#overlay" ).click(function(e) {
+          classie.toggle( e.target, 'opak' );
+          var menuRight = document.getElementById( 'lateral-menu' );
+          classie.toggle( menuRight, 'cbp-spmenu-open' );
         });
 
     </script>

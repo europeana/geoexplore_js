@@ -110,8 +110,8 @@ ItemSpider.prototype.renderItemPopup = function(marker)
 			</div>\
 		  </div>\
 		  <div class="item-info ">\
-			<h2><a href="' + uri + '">' + titleHTML + '</a></h2>\
-			<h5 class=""><a href="' + uri + '">' + agent + '</a></h5>\
+			<h2><a href="' + uri + '" class="disableTitle">' + titleHTML + '</a></h2>\
+			<h5 class=""><a href="' + uri + '" class="disableCreator">' + agent + '</a></h5>\
 			<div class="item-concepts">Relationship placeholder</div>\
 			<footer>\
 			  <div class="item-metadata">\
@@ -157,8 +157,8 @@ ItemSpider.prototype.renderAgentPopup = function(agent, relation, marker)
 			</div>\
 		  </div>\
 		  <div class="item-info">\
-			<h2><a href="' + uri + '">' + titleHTML + '</a></h2>\
-			<h5 class=""><a href="' + uri + '">' + prof + '</a></h5>\
+			<h2><a href="' + uri + '" class="disableTitle">' + titleHTML + '</a></h2>\
+			<h5 class=""><a href="' + uri + '" class="disableCreator">' + prof + '</a></h5>\
 			<div class="item-concepts">' + relation + '</div>\
 		  </div>\
 		</article>';

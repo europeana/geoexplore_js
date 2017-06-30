@@ -58,8 +58,8 @@ ListResults.prototype.renderItem = function(item, jq)
 		</div>\
 	  </div>\
 	  <div class="item-info ">\
-		<h2><span>' + titleHTML + '</span></h2>\
-		<h5 class=""><span>' + agent + '</span></h5>\
+		<h2><span class="disableTitle">' + titleHTML + '</span></h2>\
+		<h5 class=""><span class="disableCreator">' + agent + '</span></h5>\
 		<div class="item-concepts">Relationship placeholder</div>\
 		<footer>\
 		  <div class="item-metadata">\

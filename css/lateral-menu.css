@@ -124,4 +124,8 @@
     z-index: 1020 !important;
 }
 
+.leaflet-control-container {
+	z-index: 1012;
+}
+
 

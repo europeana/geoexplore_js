@@ -22,7 +22,7 @@ ItemSpider.prototype.render = function()
 
 	this.group.clearLayers();
 	this.master = null;
-	$('.leaflet-zoom-animated').parent().css('z-index', 1011);
+	$('.leaflet-zoom-animated').parent().css('z-index', 1000);
 
 	var itemPlaces = this.item.getPlaces();
 	for (var e in itemPlaces)

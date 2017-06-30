@@ -10,6 +10,9 @@ EuropeanaMap.prototype.install = function()
 	var tiles = L.tileLayer(tile_url, { attribution: 'Europeana Geoexplore', maxZoom: 18 });
     this.map = L.map('map', {center: [20, -10], zoom: 2, layers: [tiles]});
 
+	var bounds = L.latLngBounds(L.latLng(-95, -180), L.latLng(95, 180));
+	this.map.setMaxBounds(bounds);
+
 	var _this = this;
 	this.markers = L.markerClusterGroup(
 	{

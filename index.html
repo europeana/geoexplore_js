@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-skrollr">
+<html lang="en">
 
   <head>
     <!-- Meta -->
@@ -123,6 +123,7 @@
     <!-- </div> -->
   <div class="map-wrapper">
       <div id="map" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag"></div>
+      <!-- <div id="overlay"></div> -->
   </div>
 
     <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right results-list cf" id="lateral-menu"  style="overflow-y: scroll">
@@ -155,6 +156,15 @@
 
 		var spider      = new ItemSpider(map.getMap());
 		var listResults = new ListResults();
+
+        var markerLayer = $( ".leaflet-marker-pane" );
+
+        $( markerLayer ).append( "<div id='overlay'></div>" );
+        $( "#overlay" ).click(function(e) {
+          classie.toggle( e.target, 'opak' );
+          var menuRight = document.getElementById( 'lateral-menu' );
+          classie.toggle( menuRight, 'cbp-spmenu-open' );
+        });
 
     </script>
     <!-- /.JS -->

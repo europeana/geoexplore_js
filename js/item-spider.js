@@ -7,6 +7,7 @@ function ItemSpider(map)
 	  , 'Agent': L.icon({'iconUrl': 'img/marker_icon_persons.png', 'iconSize': [26, 38], 'iconAnchor': [13, 38] })
 	};
 	this.group  = L.featureGroup();
+	this.group.setZIndex(2000);
 	this.master = null;
 	map.addLayer(this.group);
 }

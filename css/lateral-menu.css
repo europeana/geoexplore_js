@@ -111,9 +111,9 @@
     z-index: 1020;
 }
 #overlay {
-    background-color: white;    
-    opacity: 0;
-    position: fixed !important;
+    opacity: 0.3 !important;
+    background-color: black !important;
+	position: fixed !important;
     top:0;
 }
 .opak {

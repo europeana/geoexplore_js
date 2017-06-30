@@ -28,11 +28,6 @@
     <script type='text/javascript' src="js/list-results.js"></script>
     <script type='text/javascript' src="js/europeana.map.js"></script>
 
-    <!-- DATA -->
-    <script type="text/javascript" src="js/places.js"></script>
-    <script type="text/javascript" src="js/places_agents.js"></script>
-    <script type="text/javascript" src="js/facets_item.js"></script>
-
 	<script type="text/javascript">
 
       var headLinks = [{
@@ -51,7 +46,7 @@
   </head>
 
   <!-- <body class="animsition"> -->
-  <body>
+  <body onload="loadMarkers();">
     <!-- <div class="map-heading header-wrapper"> -->
       <header class="header">
         <div class="cf">
@@ -141,19 +136,6 @@
 
 		map.install();
 
-        for (var uri in places)
-        {
-            var geo = places[uri];
-            var longitude = geo[0];
-            var latitude  = geo[1];
-            if (isNaN(longitude) || isNaN(latitude)) { continue; }
-
-            var density = facets_item[uri];
-			map.addMarker([latitude, longitude], uri, density);
-        }
-
-        map.getMap().addLayer(map.markers);
-
 		var spider      = new ItemSpider(map.getMap());
 		var listResults = new ListResults();
 
@@ -168,7 +150,34 @@
           }
         });
 
+
+		var loadMarkers = function()
+		{
+			for (var uri in places)
+			{
+				var geo = places[uri];
+				var longitude = geo[0];
+				var latitude  = geo[1];
+				if (isNaN(longitude) || isNaN(latitude)) { continue; }
+
+				var density = facets_item[uri];
+				map.addMarker([latitude, longitude], uri, density);
+			}
+
+			map.getMap().addLayer(map.markers);
+		}
+
+		var pane = map.getMap().createPane('labels');
+		pane.style.zIndex = 650;
+		pane.style.backgroundColor = "red";
+
     </script>
     <!-- /.JS -->
+
+    <!-- DATA -->
+    <script type="text/javascript" src="js/places.js"></script>
+    <script type="text/javascript" src="js/places_agents.js"></script>
+    <script type="text/javascript" src="js/facets_item.js"></script>
+
 </body>
 </html>

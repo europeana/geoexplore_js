@@ -7,7 +7,6 @@ function ItemSpider(map)
 	  , 'Agent': L.icon({'iconUrl': 'img/marker_icon_persons.png', 'iconSize': [26, 38], 'iconAnchor': [13, 38] })
 	};
 	this.group  = L.featureGroup();
-	this.group.setZIndex(2000);
 	this.master = null;
 	map.addLayer(this.group);
 }
@@ -35,13 +34,13 @@ ItemSpider.prototype.render = function()
 		var latitude  = geo[1];
 
 		var icon = this.icons[this.item.getClass()];
-		marker = L.marker([latitude, longitude], { 'title': uri, 'icon': icon });
+		marker = L.marker([latitude, longitude], { 'title': uri, 'icon': icon, 'zIndexOffset': 2000 });
 		this.renderItemPopup(marker);
 		this.group.addLayer(marker);
 
 		if (this.master === null) { this.master = marker; continue; }
 
-		L.Polyline.Arc(this.master.getLatLng(), marker.getLatLng()).addTo(this.group);
+		var arc = L.Polyline.Arc(this.master.getLatLng(), marker.getLatLng(), { 'color': 'white'}).addTo(this.group);
 	}
 
 	this.map.fitBounds(this.group.getBounds());
@@ -61,11 +60,11 @@ ItemSpider.prototype.renderMarker = function(object, coord)
 //	this.group.addLayer(marker);
 //	L.Polyline.Arc(this.master.getLatLng(), marker.getLatLng()).addTo(this.group);
 
-    var marker = L.marker(coord, { 'title': object.getURI(), 'icon': this.icons[object.getClass()] });
+    var marker = L.marker(coord, { 'title': object.getURI(), 'icon': this.icons[object.getClass()], 'zIndexOffset': 2000 });
 	this.group.addLayer(marker);
 	if (this.master === null) { this.master = marker; return marker; }
 
-	L.Polyline.Arc(this.master.getLatLng(), marker.getLatLng()).addTo(this.group);
+	var arc = L.Polyline.Arc(this.master.getLatLng(), marker.getLatLng(), { 'color': 'white'}).addTo(this.group);
 	return marker;
 }
 

@@ -155,7 +155,8 @@ Agent.prototype.getDateOfDeath = function()
 
 Agent.prototype.getDepiction = function()
 {
-	return this.data.depiction;
+	var dep = this.data.depiction;
+	return ( dep === undefined ? "img/EU_thumbnails_person.png" : dep );
 }
 
 Agent.prototype.getProfession = function()

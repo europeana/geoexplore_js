@@ -34,6 +34,14 @@ EuropeanaMap.prototype.install = function()
 			});
 		}
 	});
+
+	this.map.on("moveend", function () {
+		var transform_matrix = $(".leaflet-map-pane").css('transform');
+		var x = parseInt(transform_matrix.split(',')[4])
+		var y = parseInt(transform_matrix.split(',')[5])
+		$("#overlay").css('transform', 'translate3d(-' + x + 'px, -' + y + 'px, 0px)');
+
+	});
 }
 
 EuropeanaMap.prototype.getMap = function() { return this.map; }
